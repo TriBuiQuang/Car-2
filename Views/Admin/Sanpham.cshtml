@@ -1,0 +1,115 @@
+﻿@model PagedList.PagedList<Car.Models.SanPham>
+@using Car.Models
+@using PagedList.Mvc;
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>....</text>
+    }
+}
+@{
+    ViewBag.Title = "Sản phẩm phụ kiện phụ tùng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left"><i class="fas fa-cube"></i> Quản Lý Thông Tin Sản Phẩm</h3>
+    <div class="col-md-6 float-right">
+        <a href="@Url.Action("Themmoisp", "Admin")" class="btn btn-red float-right"><i class="fas fa-plus"></i> Thêm mới</a>
+        <div class="col-md-7 float-right">
+            @using (Html.BeginForm("Sanpham", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-blue" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th width="10%"><i class="fas fa-barcode"></i> Mã NSX</th>
+                    <th><i class="fas fa-cube"></i> Tên sản phẩm : </th>
+                    <th><i class="fas fa-sort-amount-up"></i> Số lượng</th>
+                    <th><i class="fas fa-comment-alt"></i> Mô tả</th>
+                    <th><i class="fas fa-dollar-sign"></i> Giá bán (VND)</th>
+                    <th><i class="fas fa-image"></i> Ảnh Bìa</th>
+                    <th><i class="fas fa-cubes"></i> Loại</th>
+                    <th width="9%"><i class="fas fa-cogs"></i> Chức năng</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaSP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenSP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoLuong)
+                        </td>
+                        <td>
+                            @Truncate(item.MoTa, 100)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GiaBan)
+                        </td>
+                        <td>
+                            <img src="@Url.Content("~/Hinhsanpham/" + item.AnhBia)" style="height:100px ; width:130px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoaiSP.TenLoai)
+                        </td>
+                        <td class="function">
+                            <a href="@Url.Action("Suasp","Admin", new { id = item.MaSP })" class="btn btn-blue"><i class="far fa-edit"></i></a>
+                            <a href="@Url.Action("Xoasp","Admin", new { id = item.MaSP })" class="btn btn-red"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        @*<div class="float-right">
+                <ul class="pagination">
+                    @while (Model.PageCount > Model.PageNumber)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">Previous</span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QLLoai","Admin",new { page = Model.PageNumber})">@Model.PageNumber</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>*@
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+
+    </div>
+</div>
+<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

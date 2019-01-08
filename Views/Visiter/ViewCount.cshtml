@@ -1,0 +1,35 @@
+﻿@model Car.Models.VIEW
+
+
+
+<h2>ViewCount</h2>
+
+
+<table class="table">
+    <tr>       
+        <th width="50%"><i class="fas fa-calendar-alt"></i> Ngày </th>
+        <th width="50%"><i class="fas fa-eye"></i> Lượt xem</th>        
+    </tr>
+
+    <tr>
+        <td>         
+            @Html.DisplayFor(model => model.Ngay)
+        </td>
+        <td>
+            
+            @Html.DisplayFor(model => model.View1)
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+            Tổng
+        </td>
+        <td>
+            @ViewBag.TongView
+        </td>
+
+    </tr>
+
+
+</table>

@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Minimal Bootstrap Theme">
+    <meta name="keywords" content="onepage,responsive,minimal,bootstrap,theme">
+    <meta name="author" content="">
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="~/Content/bootstrapv3.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/jpreloader.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/animate.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/plugin.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/owl.theme.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/owl.transitions.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/style.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/Site.css" type="text/css">
+    <link rel="stylesheet" href="~/demo/demo.css" type="text/css">
+
+    <!-- custom background -->
+    <link rel="stylesheet" href="~/Content/bg.css" type="text/css">
+
+    <!-- color scheme -->
+    <link rel="stylesheet" href="~/Content/color.css" type="text/css" id="colors">
+
+    <!-- load fonts -->
+    <link rel="stylesheet" href="~/fonts/font-awesome/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="~/fonts/elegant_font/HTML_CSS/style.css" type="text/css">
+    <link rel="stylesheet" href="~/fonts/et-line-font/style.css" type="text/css">
+
+    <link href="~/fonts/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <!-- revolution slider -->
+    <link rel="stylesheet" href="~/rs-plugin/css/settings.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/rev-settings.css" type="text/css">
+</head>
+<body>
+
+
+    <div id="wrapper">
+        <!-- header begin -->
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- logo begin -->
+                        <h1 id="logo">
+                            <a href="@Url.Action("Index", "Car")">
+                                <img class="logo" src="~/images/logo.jpg" height="75px" alt="">
+                            </a>
+                        </h1>
+                        <!-- logo close -->
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li>
+                                    @*<a href="">Trang Chủ</a>*@
+                                    <a href="@Url.Action("Index", "Car")">Trang chủ</a>
+                                </li>
+
+                                <li><a href="@Url.Action("Index", "About")">Giới Thiệu</a></li>
+                                <li>
+                                    <a href="">Sản phẩm</a>
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Index", "Car")">Xe</a>
+                                        </li>
+                                        <li><a href="@Url.Action("PhuTung", "Car")">Phụ Tùng & Phụ Kiện </a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    @if (Session["TaiKhoan"] == null)
+                                    {
+                                        <a href="#">Đăng nhập</a>
+                                        <ul>
+                                            <li><a href=@Url.Action("Dangnhap", "Nguoidung")><i class="fas fa-sign-in-alt"></i>Đăng nhập</a></li>
+                                            <li><a href=@Url.Action("Dangky", "Nguoidung")><i class="fas fa-user-plus"></i>Đăng Ký</a></li>
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" style="color:red">Xin chào @Session["TenKH"]</a>
+                                        <ul>
+                                            <li><a href="@Url.Action("TTNguoiDung","Nguoidung",new { id=Session["MaKH"]})" style="color:red">Thông tin người dùng</a></li>
+                                            <li><a href=@Url.Action("Dangxuat","Nguoidung")>Đăng Xuất</a></li>
+                                        </ul>
+                                    }
+                                </li>
+                                <li> @Html.Action("GioHangpartial", "GioHang")</li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- mainmenu close -->
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center;margin-top:-17px;">
+                            @using (Html.BeginForm("Search", "Car", FormMethod.Get, new { @class = "navbar-form navbar-right", role = "search", id = "search-form" }))
+                            {
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Tìm kiếm" name="SearchTerm" value="@ViewBag.SearchTerm" id="search-box">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" style="padding:6px 5px;"><i class="fas fa-search" style="margin:4px;"></i></button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+        <!-- content begin -->
+        <div id="content" class="no-bottom no-top">
+            <!-- revolution slider begin -->
+            <section id="section-slider" class="fullwidthbanner-container">
+                <div id="revolution-slider">
+                    <ul>
+                        <li data-transition="fade" data-slotamount="10" data-masterspeed="200" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="~/images-slider/car1.jpg" alt="" />
+                            <div class="tp-caption big-white sft"
+                                 data-x="0"
+                                 data-y="160"
+                                 data-speed="800"
+                                 data-start="400"
+                                 data-easing="easeInOutExpo"
+                                 data-endspeed="450">
+                                Our Expertise For
+                            </div>
+                            <div class="tp-caption ultra-big-white customin customout start"
+                                 data-x="0"
+                                 data-y="center"
+                                 data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-speed="800"
+                                 data-start="400"
+                                 data-easing="easeInOutExpo"
+                                 data-endspeed="400">
+                                Interior Design
+                            </div>
+                            <div class="tp-caption sfb"
+                                 data-x="0"
+                                 data-y="335"
+                                 data-speed="400"
+                                 data-start="800"
+                                 data-easing="easeInOutExpo">
+                                <a href="#" class="btn-slider">
+                                    Our Portfolio
+                                </a>
+                            </div>
+                        </li>
+                        <li data-transition="fade" data-slotamount="10" data-masterspeed="200" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="~/images-slider/car2.jpg" alt="" />
+                            <div class="tp-caption big-white sft"
+                                 data-x="0"
+                                 data-y="160"
+                                 data-speed="800"
+                                 data-start="400"
+                                 data-easing="easeInOutExpo"
+                                 data-endspeed="450">
+                                Featured Project
+                            </div>
+                            <div class="tp-caption ultra-big-white customin customout start"
+                                 data-x="0"
+                                 data-y="center"
+                                 data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-speed="800"
+                                 data-start="400"
+                                 data-easing="easeInOutExpo"
+                                 data-endspeed="400">
+                                Green Interior
+                            </div>
+                            <div class="tp-caption sfb"
+                                 data-x="0"
+                                 data-y="335"
+                                 data-speed="400"
+                                 data-start="800"
+                                 data-easing="easeInOutExpo">
+                                <a href="#" class="btn-slider">
+                                    Our Portfolio
+                                </a>
+                            </div>
+                        </li>
+                        <li data-transition="fade" data-slotamount="10" data-masterspeed="200" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="~/images-slider/car3.jpg" alt="" />
+                            <div class="tp-caption big-white sft"
+                                 data-x="0"
+                                 data-y="160"
+                                 data-speed="800"
+                                 data-start="400"
+                                 data-easing="easeInOutExpo"
+                                 data-endspeed="450">
+                                Interior Remodeling To Makes
+                            </div>
+                            <div class="tp-caption ultra-big-white customin customout start"
+                                 data-x="0"
+                                 data-y="center"
+                                 data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-speed="800"
+                                 data-start="400"
+                                 data-easing="easeInOutExpo"
+                                 data-endspeed="400">
+                                Your Life Easier
+                            </div>
+                            <div class="tp-caption sfb"
+                                 data-x="0"
+                                 data-y="335"
+                                 data-speed="400"
+                                 data-start="800"
+                                 data-easing="easeInOutExpo">
+                                <a href="#" class="btn-slider">
+                                    Our Portfolio
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- revolution slider close -->
+            <!-- section begin -->
+            <section id="view-all-projects" class="call-to-action bg-color text-center" data-speed="5" data-type="background">
+                <div>
+                    @RenderBody()
+                </div>
+
+                <!-- -->
+
+            </section>
+            <!-- logo carousel section close -->
+            <!-- section begin -->
+            <section id="section-testimonial" class="text-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+                            <h1>Customer Says</h1>
+                            <div class="separator"><span><i class="fa fa-circle"></i></span></div>
+                            <div class="spacer-single"></div>
+                        </div>
+                    </div>
+                    <div id="testimonial-carousel" class="de_carousel  wow fadeInUp" data-wow-delay=".3s">
+                        <div class="col-md-6 item">
+                            <div class="de_testi">
+                                <blockquote>
+                                    <p>I'm always impressed with the services. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                    <div class="de_testi_by">
+                                        John, Customer
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="col-md-6 item">
+                            <div class="de_testi">
+                                <blockquote>
+                                    <p>I have very much enjoyed with your services. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                    <div class="de_testi_by">
+                                        Michael, Customer
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="col-md-6 item">
+                            <div class="de_testi">
+                                <blockquote>
+                                    <p>I totally recommend your services. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                    <div class="de_testi_by">
+                                        Patrick, Customer
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="col-md-6 item">
+                            <div class="de_testi">
+                                <blockquote>
+                                    <p>I have very much enjoyed with your services. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                    <div class="de_testi_by">
+                                        James, Customer
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+            <!-- footer begin -->
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/images/logo.jpg" class="logo-small" alt=""><br>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="widget widget_recent_post">
+                                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=340&height=150&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=523301211388900" width="340" height="150" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Liên Hệ</h3>
+                            <div class="widget widget-address">
+                                <address>
+                                    <span>101 RedStreet </span>
+                                    <span><strong>Phone:</strong>911</span>
+                                    <span><strong>Fax:</strong>911</span>
+                                    <span><strong>Email 1:</strong><a href="mailto:buiquangductri@gmail.com">buiquangductri@gmail.com</a></span>
+                                    <span><strong>Email 2:</strong><a href="mailto:hakai.prince@gmail.com">hakai.prince@gmail.com</a></span>
+                                    <span><strong>Web:</strong><a href="#">http://car.somee.com</a></span>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="subfooter">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                &copy; Copyright 2015 - Archi by Designesia
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+                                    <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+                                    <a href="#"><i class="fa fa-rss fa-lg"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
+                                    <a href="#"><i class="fa fa-skype fa-lg"></i></a>
+                                    <a href="#"><i class="fa fa-dribbble fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- footer close -->
+        </div>
+    </div>
+
+
+
+    <!--chat boxz-->
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jpreLoader.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.isotope.min.js"></script>
+    <script src="~/Scripts/easing.js"></script>
+    <script src="~/Scripts/jquery.flexslider-min.js"></script>
+    <script src="~/Scripts/jquery.scrollto.js"></script>
+    <script src="~/Scripts/owl.carousel.js"></script>
+    <script src="~/Scripts/jquery.countTo.js"></script>
+    <script src="~/Scripts/classie.js"></script>
+    <script src="~/Scripts/video.resize.js"></script>
+    <script src="~/Scripts/validation.js"></script>
+    <script src="~/Scripts/wow.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/enquire.min.js"></script>
+    <script src="~/Scripts/designesia.js"></script>
+
+    <script src="demo/demo.js"></script>
+
+
+    <!-- SLIDER REVOLUTION SCRIPTS  -->
+    <script type="text/javascript" src="~/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    @*<!-- Subiz -->
+    <script>
+        (function (s, u, b, i, z) {
+            u[i] = u[i] || function () {
+                u[i].t = +new Date();
+                (u[i].q = u[i].q || []).push(arguments);
+            };
+            z = s.createElement('script');
+            var zz = s.getElementsByTagName('script')[0];
+            z.async = 1; z.src = b; z.id = 'subiz-script';
+            zz.parentNode.insertBefore(z, zz);
+        })(document, window, 'https://widgetv4.subiz.com/static/js/app.js', 'subiz');
+        subiz('setAccount', 'acqepedqsbvwnnbriuwe');
+    </script>
+    <!-- End Subiz -->*@
+</body>
+</html>

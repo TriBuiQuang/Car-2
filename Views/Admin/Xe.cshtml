@@ -1,0 +1,138 @@
+﻿@model PagedList.PagedList<Car.Models.Xe>
+@using Car.Models
+@using PagedList.Mvc;
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>....</text>
+    }
+}
+@{
+    ViewBag.Title = "Xe Info";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left"><i class="fas fa-car"></i> Thông Tin Chi Tiết Xe</h3>
+    <div class="col-md-6 float-right">
+        <a href="@Url.Action("Themmoixe", "Admin")" class="btn btn-red float-right"><i class="fas fa-plus"></i> Thêm mới</a>
+        <div class="col-md-7 float-right">
+            @using (Html.BeginForm("Xe", "Admin", FormMethod.Post))
+            {
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-blue" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-car"></i> Tên Xe </th>
+                    <th><i class="fas fa-comment-alt"></i> Mô tả</th>
+                    <th><i class="fas fa-flag"></i> Tình trạng</th>
+                    <th><i class="fas fa-dollar-sign"></i> Giá bán (VND)</th>
+                    <th><i class="fas fa-image"></i> Ảnh Bìa</th>
+                    <th><i class="fas fa-building"></i> Nhà sx</th>
+                    <th><i class="fas fa-calendar-alt"></i> Năm sản xuất</th>
+                    <th><i class="fas fa-calendar-alt"></i> Thời gian BH</th>
+                    <th><i class="fas fa-chair"></i> Số chỗ</th>
+                    <th><i class="fas fa-globe-asia"></i> Xuất sứ</th>
+                    <th><i class="fas fa-palette"></i> Màu xe</th>
+                    <th><i class="fas fa-battery-three-quarters"></i> Nhiên liệu</th>
+                    <th><i class="fas fa-sort-numeric-up"></i> Hộp số</th>
+                    <th width="110px"><i class="fas fa-cogs"></i> Chức năng</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tenxe)
+                        </td>
+                        <td>
+                            @Truncate(item.Mota, 100)
+                        </td>
+                        <td>
+                            @(item.TinhTrang == true ? "Xe mới" : "Xe cũ" )
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gia)
+                        </td>
+
+                        <td>
+
+                            <img src="@Url.Content("~/Hinhsanpham/" + item.Anh)" style="height:100px ; width:130px" />
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNSX)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NamSanXuat)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoCho)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.XuatXu)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MauXe)
+                        </td>
+
+                        <td>
+                            @(item.NhienLieu == true ? "Xăng" : "Dầu")
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HopSo)
+                        </td>
+
+                        <td class="function">
+                            <a href="@Url.Action("Suaxe","Admin", new { id = item.Maxe })" class="btn btn-blue"><i class="far fa-edit"></i></a>
+                            <a href="@Url.Action("Delete2","Admin", new { id = item.Maxe })" class="btn btn-red"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="text-center">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Xe", new { page = page }))
+        </div>
+
+    </div>
+</div>
+<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

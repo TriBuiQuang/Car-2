@@ -1,0 +1,110 @@
+﻿<ul class="sidebar navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" href="@Url.Action("Index", "Admin")">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Thống kê</span>
+        </a>
+    </li>
+    @if (Convert.ToInt32(Session["AdminRole"]) == 2 || Convert.ToInt32(Session["AdminRole"]) == 0)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cubes"></i>
+                <span>Phụ tùng, phụ kiện</span>
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+                <a class="dropdown-item" href="@Url.Action("QLLoai", "Admin")">
+                    <i class="fas fa-cube"></i>
+                    <span>QL Loại</span>
+                </a>
+                <a class="dropdown-item" href="@Url.Action("Sanpham", "Admin")">
+                    <i class="fas fa-cube"></i>
+                    <span>Sản phẩm Info</span>
+                </a>
+            </div>
+        </li>
+    }
+    @if (Convert.ToInt32(Session["AdminRole"]) == 1 || Convert.ToInt32(Session["AdminRole"]) == 0)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-car"></i>
+                <span>Xe hơi</span>
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+                <a class="dropdown-item" href="@Url.Action("Xe", "Admin")">
+                    <i class="fas fa-car"></i>
+                    <span>Xe Info</span>
+                </a>
+                <a class="dropdown-item" href="@Url.Action("QLNsx", "Admin")">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>QL NSX</span>
+                </a>
+            </div>
+        </li>
+    }
+    @if (Convert.ToInt32(Session["AdminRole"]) == 0)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-users"></i>
+                <span>Tài khoản</span>
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+                <a class="dropdown-item" href="@Url.Action("DSAdmin", "Admin")">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Admin Info</span>
+                </a>
+                <a class="dropdown-item" href="@Url.Action("QLUser", "Admin")">
+                    <i class="fas fa-users"></i>
+                    <span>QL User</span>
+                </a>
+            </div>
+        </li>
+    }
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Đơn hàng</span>
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="@Url.Action("DonHang", "Admin")">
+                <i class="fas fa-flag"></i>
+                <span>Đơn hàng info</span>
+            </a>
+            <a class="dropdown-item" href="@Url.Action("QLGiaodich", "Admin")">
+                <i class="fas fa-exchange-alt"></i>
+                <span>QL Giao dịch</span>
+            </a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-users"></i>
+            <span>Quản lý quảng cáo</span>
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="@Url.Action("NhaCungCap", "Admin")">
+                <i class="fas fa-user-tie"></i>
+                <span>Nhà cung cấp</span>
+            </a>
+            <a class="dropdown-item" href="@Url.Action("QuangCao", "Admin")">
+                <i class="fas fa-users"></i>
+                <span>Quảng cáo</span>
+            </a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-users"></i>
+            <span>QL Banner</span>
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="@Url.Action("Banner", "Admin")">
+                <i class="fas fa-user-tie"></i>
+                <span>Banner</span>
+            </a>
+        </div>
+    </li>
+</ul>

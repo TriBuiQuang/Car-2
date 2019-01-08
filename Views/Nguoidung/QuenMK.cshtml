@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "QuenMK";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<section id="view-all-projects" class="call-to-action bg-color text-center" data-speed="5" data-type="background">
+    <div>
+
+        <table align="center" cellpadding="20">
+            <h2 style="text-align:center; padding:20px">Quên mật khẩu</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+
+                <tr style="height:40px">
+                    <td>Email : </td>
+                    <td>
+                        @Html.TextBox("Email")
+                        @ViewData["Loi1"]
+                    </td>
+                </tr>
+                    
+                    <h4 style="color:red; text-align:center">@ViewBag.Thongbao</h4>
+                    <tr style="height:40px">
+                        <td></td>
+                        <td>
+                            <button type="submit" value="QuenTK" class="btn btn-primary">lấy tài khoản</button>
+                            <button type="submit" value="trở về" class="btn btn-primary">@Html.ActionLink("trở về", "Dangnhap", "Nguoidung")</button>
+                        </td>
+                    </tr>
+
+            }
+        </table>
+    </div>
+</section>
+
+
+
+

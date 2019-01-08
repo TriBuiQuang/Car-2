@@ -1,0 +1,93 @@
+﻿@model PagedList.PagedList<Car.Models.DonHang>
+@using Car.Models
+@using PagedList.Mvc;
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>....</text>
+    }
+}
+
+@{
+    ViewBag.Title = "Đơn hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left"><i class="fas fa-flag"></i> Quản Lý Thông Tin Đơn Hàng</h3>
+    <div class="col-md-6 float-right">
+
+        <div class="col-md-7 float-right">
+            @using (Html.BeginForm("DonHang", "Admin", FormMethod.Post))
+            {
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-blue" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th width="10%"><i class="fas fa-barcode"></i> Mã Đơn hàng</th>
+                    <th><i class="fas fa-flag"></i> Tình trạng giao </th>
+                    <th><i class="fas fa-calendar-alt"></i> Ngày đặt</th>
+                    <th><i class="fas fa-user-alt"></i> Khách hàng</th>
+                    
+                    <th width="140px"><i class="fas fa-cogs"></i> Chức năng</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaDH)
+                    </td>
+                    <td>
+                        @if (item.TinhTrangGiaoHang == false)
+                        {<p><b>Chưa giao</b> </p> }
+                        else
+                        {<p><b>giao</b> </p>}
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayDat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KhachHang.HoTen)
+                    </td>
+                    <td class="function">
+                        <a href="@Url.Action("ChitietDH","Admin", new { id = item.MaDH })" class="btn btn-blue"><i class="fas fa-info"></i></a>
+                        <a href="@Url.Action("Suadonhang","Admin", new { id = item.MaDH })" class="btn btn-blue"><i class="far fa-edit"></i></a>
+                        <a href="@Url.Action("Xoadh","Admin", new { id = item.MaDH })" class="btn btn-red"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("DonHang", new { page = page }))
+
+    </div>
+</div>
+<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

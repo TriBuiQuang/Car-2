@@ -1,0 +1,94 @@
+﻿<style>
+    .mb35 {
+        margin-bottom: 35px;
+    }
+</style>
+@{
+    ViewBag.Title = "Chi tiết phụ tùng";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="row">
+    <div class="col-md-12 mb35" >
+        <h1 class="text-center"> <span class="label label-warning">Thông tin chi tiết @Model.TenSP</span></h1>
+    </div>
+    <div class="col-md-12 mb35">
+        <div class="col-md-7">
+            <img class="border" src="~/Hinhsanpham/@Model.AnhBia" style="width:600px;height:400px" />
+        </div>
+        <div class="border col-md-5">
+            <h3>@Model.TenSP</h3>
+            <div class="col-md-12">
+                <div class="col-md-3">Mô tả: </div>
+                <div class="col-md-9">@Model.MoTa</div>
+            </div>
+            <div class="col-md-12">
+
+                <div class="col-md-3">Giá bán: </div>
+                <div class="col-md-9">@String.Format("{0:0,0}", Model.GiaBan) VNĐ</div>
+            </div>
+
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <div class="form-group text-right">
+                    <form action="https://www.baokim.vn/payment/product/version11" method="get">
+                        <input type="hidden" name="business" value="buiquangductri@gmail.com">
+                        <input type="hidden" name="product_name" value="@Model.TenSP">
+                        <input type="hidden" name="product_price" value="@Model.GiaBan">
+                        <input type="hidden" name="product_quantity" value="1">
+                        <input type="hidden" name="total_amount" value="10000">
+                        <input type="hidden" name="url_detail" value="http://localhost:59854/Car/PhuTungDetails/1">
+                        <input type="hidden" name="url_success" value="http://localhost:59854/Giohang/Xacnhandonhang">
+                        <input type="hidden" name="url_cancel" value="">
+                        <input type="hidden" name="order_description" value="@Model.MoTa">
+                        <input type="hidden" name="id" value="">
+                        <input type="image" src="~/images/green-buy-now-paypal.png" border="0" name="submit" alt="Thanh toán an toàn với Bảo Kim !" title="Thanh toán trực tuyến an toàn dùng tài khoản Ngân hàng (VietcomBank, TechcomBank, Đông Á, VietinBank, Quân Đội, VIB, SHB,... và thẻ Quốc tế (Visa, Master Card...) qua Cổng thanh toán trực tuyến BảoKim.vn">
+                    </form>
+                    <a href="@Url.Action("ThemGiohang", "Giohang", new { @iMaSP=@Model.MaSP,@strURL=Request.Url.ToString()})">
+                        <button class="btn btn-danger"><i class="fas fa-cart-arrow-down"></i> Đặt mua</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12" style="margin-bottom:60px">
+        <div class="col-md-12">
+            @foreach (var item in ViewBag.splq)
+            {
+                if (item.MaLoai == Model.MaLoai && item.Xoa == false)
+                {
+                    <div class="card col-md-3">
+                        <a  href="~/Car/PhuTungDetails/@item.MaSP">
+                            <img class="card-img-top" src="~/Hinhsanpham/@item.AnhBia" width="100%" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text" style="margin-bottom:0"> Ten SP : @item.TenSP</p>
+                                <p class="card-text " style="color:red"> Gia SP : @item.GiaBan VND</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="fb-comments" style="align-content:center" data-href="http://localhost:59854/Car/PhuTungDetails/" data-width="1200" data-numposts="5"></div>
+</div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '423172878128212',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v2.12'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+

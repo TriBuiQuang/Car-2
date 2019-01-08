@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/admin/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/fonts/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/fonts/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/adminsite.css" rel="stylesheet" />
+
+</head>
+
+<body class="bgcolor">
+    <div class="container-fluid" style="margin-top:10%">
+        <div class="row justify-content-md-center">
+
+            <div class="col-md-offset-6 col-md-4">
+                <div class="form-login">
+                    <h4>Welcome</h4>
+                    <h4 style="color:red;text-align:center">@ViewBag.Thongbao</h4>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        <input type="text" id="userName" name="username" class="form-control input-sm chat-input" placeholder="username" />
+                        <p style="color:red;">@ViewData["Loi1"]</p>
+                        <input type="password" id="userPassword" name="password" class="form-control input-sm chat-input" placeholder="password" /> 
+                        <p  style="color:red;">@ViewData["Loi2"]</p>
+                        <div class="wrapper">
+                            <span class="group-btn">
+                                <button class="btn btn-blue btn-md"> <i class="fas fa-sign-in"></i>Login</button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+</body>
+</html>

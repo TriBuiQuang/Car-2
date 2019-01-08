@@ -1,0 +1,65 @@
+﻿
+@model PagedList.PagedList<Car.Models.GiaoDich>
+@using Car.Models
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "QL Giao dịch";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left"><i class="fas fa-exchange-alt"></i> Quản Lý Giao dịch</h3>
+    <div class="col-md-6 float-right">
+        <div class="col-md-7 float-right">
+            @using (Html.BeginForm("QLGiaodich", "Admin", FormMethod.Post))
+            {
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-blue" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-calendar"></i> Ngày mua</th>
+                    <th><i class="fas fa-user-alt"></i> Họ và Tên</th>
+                    <th width="110px"><i class="fas fa-cogs"></i> Chức năng</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayMua)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KhachHang.HoTen)
+                        </td>
+                        <td class="function">
+                            <a href="@Url.Action("SuaGiaodich","Admin", new { id = item.MaGD })" class="btn btn-blue"><i class="far fa-edit"></i></a>
+                            <a href="@Url.Action("XoaGiaodich","Admin", new { id = item.MaGD })" class="btn btn-red"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("QLGiaodich", new { page = page }))
+
+    </div>
+</div>
+<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

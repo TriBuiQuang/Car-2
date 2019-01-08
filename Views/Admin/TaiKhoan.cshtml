@@ -1,0 +1,8 @@
+﻿@if (Model != null)
+{
+
+
+    <span style="color:red">Xin Chào <a href=@Url.Action("SuaTT","Admin") style="color:red">@Model.HoTen</a></span>
+    <a class="btn-primary btn-sm" href=@Url.Action("Dangxuat","Admin")>Đăng Xuất</a>
+}
+

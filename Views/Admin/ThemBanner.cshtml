@@ -1,0 +1,57 @@
+﻿@model Car.Models.Banner
+@{
+    ViewBag.Title = "Thêm Banner";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left" style="color:red"><i class="fas fa-plus"></i> Thêm Mới Banner</h3>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+
+        @using (Html.BeginForm("ThemBanner", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4 float-left">
+                        <i class="fas fa-list"></i>
+                        @Html.LabelFor(model => model.TenBanner, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8 float-right">
+                        @Html.EditorFor(model => model.TenBanner, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.TenBanner, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 float-left">
+                        <i class="fas fa-image"></i>
+                        @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8 float-right">
+                        @Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 float-left">
+                        <i class="fas fa-sitemap"></i>
+                        @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8 float-right">
+                        @Html.EditorFor(model => model.url, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                        @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" col-md-12 float-left">
+                    <button type="submit" class="btn btn-red float-right"><i class="fas fa-plus"></i> Thêm mới</button>
+                    <a href="@Url.Action("Banner","Admin")" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Trở lại</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

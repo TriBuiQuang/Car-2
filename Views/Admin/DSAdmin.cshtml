@@ -1,0 +1,91 @@
+﻿@model PagedList.PagedList<Car.Models.ADMIN>
+@using Car.Models
+@using PagedList.Mvc;
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>....</text>
+    }
+}
+@{
+    ViewBag.Title = "Danh sách admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left"><i class="fas fa-user-tie"></i> Danh Sách Admin</h3>
+    <div class="col-md-6 float-right">
+        <a href="@Url.Action("Themadmin", "Admin")" class="btn btn-red float-right"><i class="fas fa-plus"></i> Thêm mới</a>
+        <div class="col-md-7 float-right">
+            @using (Html.BeginForm("DSAdmin", "Admin", FormMethod.Post))
+            {
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-blue" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-user-alt"></i> Họ và Tên</th>
+                    <th><i class="fas fa-user"></i> Tài khoản đăng nhập</th>
+                    <th><i class="far fa-envelope"></i> Email</th>
+                    <th><i class="fas fa-phone"></i> Điện thoại</th>
+                    <th><i class="fas fa-eye"></i> Quyền</th>
+                    <th width="110px"><i class="fas fa-cogs"></i> Chức năng</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Taikhoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td class="function">
+                        <a href="@Url.Action("Suaadmin","Admin", new { id = item.MaAD })" class="btn btn-blue"><i class="far fa-edit"></i></a>
+                        <a href="@Url.Action("Xoaadmin","Admin", new { id = item.MaAD })" class="btn btn-red"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+      
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("DSAdmin", new { page = page }))
+
+    </div>
+</div>
+<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

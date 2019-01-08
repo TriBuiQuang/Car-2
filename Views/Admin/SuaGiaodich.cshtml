@@ -1,0 +1,47 @@
+﻿@model Car.Models.GiaoDich
+
+@{
+    ViewBag.Title = "Sửa giao dịch";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left" style="color:blue"><i class="fas fa-edit"></i> Sửa Giao dịch</h3>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        @using (Html.BeginForm("SuaGiaoDich", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaGD)
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4 float-left">
+                        <i class="fas fa-flag"></i>
+                        @Html.LabelFor(model => model.NgayMua, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8 float-right">
+                        @Html.EditorFor(model => model.NgayMua, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NgayMua, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 float-left">
+                        <i class="fas fa-calendar-alt"></i>
+                        @Html.LabelFor(model => model.MaKH, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8 float-right">
+                        @Html.DropDownList("MaKh");
+                    </div>
+                </div>
+            <div class="form-group">
+                <div class=" col-md-12 float-left">
+                    <button type="submit" class="btn btn-blue float-right"><i class="fas fa-edit"></i> Sửa</button>
+                    <a href="@Url.Action("QLGiaoDich","Admin")" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Trở lại</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+    

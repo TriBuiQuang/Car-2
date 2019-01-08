@@ -1,0 +1,38 @@
+﻿@model Car.Models.LoaiSP
+
+@{
+    ViewBag.Title = "Thêm loại";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-header">
+    <h3 class="float-left" style="color:red"><i class="fas fa-plus"></i> Thêm loại</h3>   
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        @using (Html.BeginForm("Themloai", "Admin", FormMethod.Post, new { @class = "form-horizontal", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-2">
+                    <i class="fas fa-cube"></i>
+                    @Html.LabelFor(model => model.TenLoai, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10 float-right">
+
+                    <input type="text" name="TenLoai" id="TenLoai" class="form-control text-box" placeholder="Nhập tên loại ..." />
+                    @Html.ValidationMessageFor(model => model.TenLoai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" col-md-12 ">
+                    <button type="submit" class="btn btn-red float-right"><i class="fas fa-plus"></i> Thêm mới</button>
+                    <a href="@Url.Action("QLLoai","Admin")" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Trở lại</a>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

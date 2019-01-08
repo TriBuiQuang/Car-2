@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết xe";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style>
+</style>
+<div class="row">
+    <div class="col-md-12 popupheader">
+        <h1 class="text-center"> <span class="label label-warning">Thông tin chi tiết  @Model.Tenxe</span></h1>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-7">
+            <img class="border" src="~/Hinhsanpham/@Model.Anh" style="width:600px;height:400px" />
+        </div>
+        <div class="border col-md-5">
+            <h3>@Model.Tenxe</h3>
+            <div class="col-md-12">
+                <div class="col-md-3">Mô tả : </div>
+                <div class="col-md-9">@Model.Mota</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3">Tình Trạng: </div>
+                <div class="col-md-9">@Model.TinhTrang</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3">Năm sản xuất: </div>
+                <div class="col-md-9">@Model.NamSanXuat</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3">Số chỗ : </div>
+                <div class="col-md-9">@Model.SoCho</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3">Xuất sứ : </div>
+                <div class="col-md-9">@Model.XuatXu</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3">Màu xe : </div>
+                <div class="col-md-9">@Model.MauXe</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3">Nhiên liệu : </div>
+                <div class="col-md-9">@Model.NhienLieu</div>
+            </div>
+            <div class="col-md-12" style="padding-bottom:10px">
+                <div class="col-md-3">Hộp số : </div>
+                <div class="col-md-9">@Model.HopSo</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:60px">
+
+        @foreach (var item in ViewBag.nhasx)
+        {
+            if (item.MaNSX == Model.MaNSX && item.Xoa == false)
+            {
+                <div class="card col-md-3">
+                    <a href="~/Car/CarDetails/@item.Maxe">
+                        <img class="card-img-top" src="~/Hinhsanpham/@item.Anh" width="100%" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text" style="margin-bottom:0"> Ten SP : @item.Tenxe</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+
+    </div>
+    <div class="fb-comments" style="align-content:center" data-href="http://localhost:59854/Car/@Model.Maxe" data-width="1200" data-numposts="5"></div>
+
+</div>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '423172878128212',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v2.12'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

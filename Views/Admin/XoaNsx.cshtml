@@ -1,0 +1,33 @@
+﻿@model Car.Models.NhaSanXuat
+
+@{
+    ViewBag.Title = "Xoá nhà sản xuất";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xoá Nhà sản xuất</h2>
+
+<h3>Bạn có chắc là muốn xoá nhà sx này chứ ?</h3>
+<div>
+    <h4>Nhà sản xuất</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNSX)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Trở về", "QLNsx")
+        </div>
+    }
+</div>

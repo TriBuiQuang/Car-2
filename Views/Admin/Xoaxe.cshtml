@@ -1,0 +1,91 @@
+﻿@model Car.Models.Xe
+
+@{
+    ViewBag.Title = "Xoaxe";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xoaxe</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Maxe)
+        @Html.HiddenFor(model => model.Tenxe)
+        @Html.HiddenFor(model => model.Mota)
+        @Html.HiddenFor(model => model.MaNSX)
+        @Html.HiddenFor(model => model.Anh)
+        @Html.HiddenFor(model => model.Gia)
+        @Html.HiddenFor(model => model.Xoa)
+        @Html.HiddenFor(model => model.TinhTrang)
+        @Html.HiddenFor(model => model.NamSanXuat)
+        @Html.HiddenFor(model => model.ThoiGianBaoHanh)
+        @Html.HiddenFor(model => model.SoCho)
+        @Html.HiddenFor(model => model.HopSo)
+        @Html.HiddenFor(model => model.MauXe)
+        @Html.HiddenFor(model => model.XuatXu)
+        @Html.HiddenFor(model => model.NhienLieu)
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Tenxe)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tenxe)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Mota)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Mota)
+            </dd>
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.Gia)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Gia)
+                </dd>*@
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Anh)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Anh)
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MaNSX)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MaNSX)
+                </dd>
+
+
+
+        </dl>
+
+        <div>
+            <img src="@Url.Content("~/Hinhsanpham/"+Model.Anh) width="120px" />Ảnh hiện tại
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Trở Về", "Index")
+</div>

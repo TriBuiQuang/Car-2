@@ -1,0 +1,67 @@
+﻿@model Car.Models.SanPham
+
+@{
+    ViewBag.Title = "Xoasp";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xoasp</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<h2>Are you sure you want to delete this?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaSP)
+        @Html.HiddenFor(model => model.TenSP)
+        @Html.HiddenFor(model => model.SoLuong)
+        @Html.HiddenFor(model => model.MoTa)
+        @Html.HiddenFor(model => model.MaLoai)
+        @Html.HiddenFor(model => model.AnhBia)
+        @Html.HiddenFor(model => model.GiaBan)
+        @Html.HiddenFor(model => model.Xoa)
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.Giaban)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Giaban)
+                </dd>*@
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+        </dl>
+        <div>
+            <img src="@Url.Content("~/Hinhsanpham/"+Model.AnhBia) width="120px" />Ảnh hiện tại
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Trở Về", "Index")
+</div>
