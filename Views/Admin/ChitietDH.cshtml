@@ -17,47 +17,78 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="col-md-12">
-                <div class="form-group">
-                    <div class="col-md-4 t">
-                        <i class="fas fa-user-alt"></i>
-                        Họ tên khách hàng :
-                    </div>
-                    <div class="col-md-8 ">
-                        @ViewBag.TenKH.HoTen
-                    </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-4 t">
+                    <i class="fas fa-user-alt"></i>
+                    Họ tên khách hàng :
                 </div>
-                <div class="form-group">
-                    <div class="col-md-4 float-left">
-                        <i class="fas fa-cube"></i>
-                        Sản phẩm :
-                    </div>
-                    <div class="col-md-8">
-                        @foreach (var item in ViewBag.Sp)
-                        {
-                            @item.TenSP
-                        }
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4 ">
-                        <i class="fas fa-sort-numeric-up"></i>
-                        @Html.DisplayNameFor(model => model.SoLuong)
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DisplayFor(model => model.SoLuong)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4 float-left">
-                        <i class="fas fa-dollar-sign"></i>
-                        @Html.DisplayNameFor(model => model.Dongia)
-                    </div>
-                    <div class="col-md-8 float-right">
-                        @Html.DisplayFor(model => model.Dongia)
-                    </div>
+                <div class="col-md-8 ">
+                    @ViewBag.TenKH.HoTen
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-md-4 t">
+                    <i class="fas fa-user-alt"></i>
+                    Email khách hàng :
+                </div>
+                <div class="col-md-8 ">
+                    @ViewBag.TenKH.Email
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 t">
+                    <i class="fas fa-user-alt"></i>
+                    Điện Thoại khách hàng :
+                </div>
+                <div class="col-md-8 ">
+                    @ViewBag.TenKH.DienThoai
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 t">
+                    <i class="fas fa-user-alt"></i>
+                    Tình trạng Hàng :
+                </div>
+                <div class="col-md-8 ">
+                    @if (@ViewBag.TinhTrangGiaoHang == false)
+                    {<p><b>Chưa giao</b> </p> }
+                    else
+                    {<p><b>Đã giao</b> </p>}
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 float-left">
+                    <i class="fas fa-cube"></i>
+                    Sản phẩm :
+                </div>
+                <div class="col-md-8">
+                    @foreach (var item in ViewBag.Sp)
+                    {
+                        @item.TenSP
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 ">
+                    <i class="fas fa-sort-numeric-up"></i>
+                    @Html.DisplayNameFor(model => model.SoLuong)
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.SoLuong)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 float-left">
+                    <i class="fas fa-dollar-sign"></i>
+                    @Html.DisplayNameFor(model => model.Dongia)
+                </div>
+                <div class="col-md-8 float-right">
+                    @Html.DisplayFor(model => model.Dongia)
+                </div>
+            </div>
+        </div>
             <div class="form-group">
 
                     <a href="@Url.Action("DonHang","Admin")" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Trở lại</a>

@@ -312,9 +312,12 @@ namespace Car.Controllers
             {
                 CTDH ctdh = db.CTDHs.SingleOrDefault(n => n.MaDH == id);
                 ViewBag.MaDH = ctdh.MaDH;
+                ViewBag.TinhTrangGiaoHang = ctdh.TinhTrangGiaoHang;
                 var tkh= db.DonHangs.Where(a => a.MaDH == ctdh.MaDH).FirstOrDefault();
+
                 ViewBag.TenKH = db.KhachHangs.Where(a => a.MaKH == tkh.MaKH).FirstOrDefault();
                 ViewBag.Sp = db.SanPhams.Where(a => a.MaSP == ctdh.MaSP).ToList();
+
                 if (ctdh == null)
                 {
                     Response.StatusCode = 404;
